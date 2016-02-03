@@ -8,7 +8,8 @@ setup(
     packages=[
         "django_blogposts",
         "django_blogposts.templatetags",
-        "django_blogposts.migrations"
+        "django_blogposts.migrations",
     ],
-    package_data={'django_blogposts': ['django_blogposts/templates']}
+    include_package_data=True,
+    package_data={'django_blogposts': ['django_blogposts/templates']},
 )
