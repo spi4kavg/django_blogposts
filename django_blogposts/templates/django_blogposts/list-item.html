@@ -1,0 +1,15 @@
+{% load static i18n %}
+
+{% block content %}
+    <div class="blogpost-item">
+        <img src="{% get_media_prefix %}{{ object.image }}" 
+        <div class="blogpost-item-title">
+            {{ object.header }}
+        </div>
+        <div class="blogpost-item-short_content">
+            {{ object.short_content|safe }}
+        </div>
+
+        <a href="{{ object.get_absolute_url }}">{% trans "More" %}...</a>
+    </div>
+{% endblock %}

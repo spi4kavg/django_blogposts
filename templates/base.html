@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>{% block meta_title %}{% endblock %}</title>
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
+        <meta name="description" content="{% block meta_description %}{% endblock %}" />
+    </head>
+    <body>
+        <h1>{% block header %}{% endblock %}</h1>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
