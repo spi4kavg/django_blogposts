@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="django_blogposts",
-    version='0.1',
+    version='0.2',
     description='Django module for simple blog',
     author='Spi4ka',
     packages=[
@@ -11,5 +11,5 @@ setup(
         "django_blogposts.migrations",
     ],
     include_package_data=True,
-    package_data={'django_blogposts': ['django_blogposts/templates', 'django_blogposts/static']},
+    package_data={'django_blogposts': ['django_blogposts/templates', ]},
 )
