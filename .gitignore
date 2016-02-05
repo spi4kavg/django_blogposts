@@ -7,3 +7,6 @@ static/blogpost/.sass-cache
 static/blogpost/node_modules
 static/blogpost/bower_components
 static/blogpost/vendor/css/base.css
+.pypirc
+build/
+django_blogposts.egg-info
