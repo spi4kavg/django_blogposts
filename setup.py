@@ -11,5 +11,5 @@ setup(
         "django_blogposts.migrations",
     ],
     include_package_data=True,
-    package_data={'django_blogposts': ['django_blogposts/templates']},
+    package_data={'django_blogposts': ['django_blogposts/templates', 'django_blogposts/static']},
 )
