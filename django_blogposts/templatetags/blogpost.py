@@ -7,7 +7,8 @@ register = template.Library()
 
 
 @register.inclusion_tag('django_blogposts/list-item.html')
-def blogpost_list_item(page):
+def blogpost_list_item(page, position="left"):
     return {
-        'object': page
+        'object': page,
+        'position': position
     }

@@ -1,0 +1,19 @@
+{
+    "name": "blogpost",
+    "version": "0.1.0",
+    "author": [
+        "spi4ka"
+    ],
+    "licencse": "",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+
+    "dependencies": {
+        "bootstrap": "3.3.6"
+    }
+}

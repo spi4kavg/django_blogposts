@@ -1,0 +1,17 @@
+{
+  "name": "blogpost",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt qunit"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "0.5.1",
+    "grunt-contrib-compass": "~1.0.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt": "~0.4.5"
+  },
+  "dependencies": {}
+}

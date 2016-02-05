@@ -3,6 +3,8 @@ __author__ = "spi4ka"
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import slugify
+from pytils.translit import translify
 
 
 class BlogPost(models.Model):
@@ -11,13 +13,15 @@ class BlogPost(models.Model):
     meta_kw = models.CharField(_("Meta-tag keywords"), max_length=400)
     meta_desc = models.TextField(_("Meta-tag Description"))
 
+    slug = models.SlugField(_("Slug"), max_length=100, null=True, blank=True)
+
     header = models.CharField(_("Header (tag H1)"), max_length=400)
     short_content = models.TextField(_("Short content for preview"))
     content = models.TextField(_("Content"))
 
     image = models.ImageField(_("Image"), upload_to="blog/%Y/%m/%d")
 
-    is_moderated = models.BooleanField(_("Is moderated"), default=False)
+    is_moderated = models.BooleanField(_("Is moderated"), default=True)
 
     da = models.DateTimeField(_("Date of create"), auto_now_add=True)
     de = models.DateTimeField(_("Date of last edit"), auto_now=True)
@@ -34,4 +38,11 @@ class BlogPost(models.Model):
         return self.header
 
     def get_absolute_url(self):
-        return reverse('django-blogposts-detail', args=(self.pk, 'qweqweqwe',))
+        return reverse('django-blogposts-detail', args=(self.pk, self.slug,))
+
+    def save(self, *args, **kwargs):
+        slug = self.slug
+        if not slug:
+            self.slug = slugify(translify(self.header))
+
+        return super(BlogPost, self).save(*args, **kwargs)
