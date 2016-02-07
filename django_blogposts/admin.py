@@ -7,4 +7,4 @@ from .models import BlogPost
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
     search_fields = ('header', 'meta_title', 'da', )
-    list_filter = ('is_moderated')
+    list_filter = ['is_moderated']
