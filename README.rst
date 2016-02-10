@@ -38,11 +38,8 @@ all templates extends from base.html. If you doesn't have it, create it or overr
 you can use sitemap
 
 from django_blogposts.sitemap import BlogPostSitemap
-```
 
-# dependencies
-```
-django
-pillow
-pytils
+By default django-blogposts provides with categories. If you dont want use categories setup in settings.py
+
+BLOGPOSTS_USE_CATEGORIES = False
 ```
