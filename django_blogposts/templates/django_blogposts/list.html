@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load i18n blogpost %}
 
-{% block header %}Blog{% endblock %}
+{% block header %}Blog {% if category %}- {{ category.name }}{% endif %}{% endblock %}
 
 {% block content %}
+    {% categories_list active_category %}
+
+    {% if category %}
+        {{ category.content }}
+    {% endif %}
     
     {% if object_list %}
         {% for object in object_list %}

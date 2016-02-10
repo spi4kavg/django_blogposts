@@ -19,12 +19,22 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
+from django_blogposts.sitemap import BlogPostSitemap
+
+sitemaps = {
+    'blog': BlogPostSitemap
+}
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='base.html'),
         name='django-blogposts-home'),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('django_blogposts.urls')),
+    
+    url(r'^sitemap\.xml$', sitemap, {
+        'sitemaps': sitemaps
+    }, name='django.contrib.sitemaps.views.sitemap')
 ]
 
 
