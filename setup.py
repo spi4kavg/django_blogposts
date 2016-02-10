@@ -12,4 +12,9 @@ setup(
     ],
     include_package_data=True,
     package_data={'django_blogposts': ['django_blogposts/templates', ]},
+    install_requires=[
+        'pillow',
+        'pytils',
+        'django-autoslug==1.9.3'
+    ]
 )
