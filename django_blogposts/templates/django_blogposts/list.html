@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n blogpost %}
 
-{% block header %}Blog {% if category %}- {{ category.name }}{% endif %}{% endblock %}
+{% block header %}{% trans "Blog" %} {% if category %}- {{ category.name }}{% endif %}{% endblock %}
 
 {% block content %}
     {% categories_list active_category %}

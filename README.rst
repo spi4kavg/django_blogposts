@@ -42,4 +42,6 @@ from django_blogposts.sitemap import BlogPostSitemap
 By default django-blogposts provides with categories. If you dont want use categories setup in settings.py
 
 BLOGPOSTS_USE_CATEGORIES = False
+
+you can use search if you send request to /?q=example+of+query
 ```
