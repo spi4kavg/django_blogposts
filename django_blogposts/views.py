@@ -34,7 +34,7 @@ class PostsListView(ListView):
                
         if self.request.GET.get('q'):
             queryset = queryset.filter(
-                header__contains=self.request.GET.get('q'),
+                header__icontains=self.request.GET.get('q'),
             )
 
         return queryset.only(*self.model_fields)
