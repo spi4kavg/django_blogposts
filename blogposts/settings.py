@@ -135,3 +135,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 BLOGPOSTS_USE_CATEGORIES = False
+
+LOCALE_PATHS = [
+    'django_blogposts/locale'
+]
