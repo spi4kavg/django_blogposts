@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from autoslug import AutoSlugField
 
 
-class Categories(models.Model):
+class Tags(models.Model):
 
     name = models.CharField(_("Name"), max_length=400)
     slug = AutoSlugField(
@@ -16,19 +16,14 @@ class Categories(models.Model):
         always_update=True
     )
 
-    content = models.TextField(
-		_("Short description of category (if needed)"),
-		null=True, blank=True
-	)
-
     is_moderated = models.BooleanField(_("Is moderated"), default=True)
 
     da = models.DateTimeField(_("Date of create"), auto_now_add=True)
     de = models.DateTimeField(_("Date of last edit"), auto_now=True)
 
     class Meta:
-        verbose_name = _("Category")
-        verbose_name_plural = _("Categories")
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
         ordering = ['-da']
 
     def __unicode__(self):
@@ -38,4 +33,4 @@ class Categories(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('django-category-blogposts-list', args=(self.pk, self.slug,))
+        return reverse('django-blogposts-list') + "?tag=%s" % (self.slug, )

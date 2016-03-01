@@ -39,9 +39,12 @@ you can use sitemap
 
 from django_blogposts.sitemap import BlogPostSitemap
 
-By default django-blogposts provides with categories. If you dont want use categories setup in settings.py
+By default django-blogposts provides with categories and tags. If you dont want use categories or tags setup in settings.py
 
 BLOGPOSTS_USE_CATEGORIES = False
+
+BLOGPOSTS_USE_TAGS = False
+
 
 you can use search if you send request to /?q=example+of+query
 ```

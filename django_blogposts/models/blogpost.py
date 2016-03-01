@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from autoslug import AutoSlugField
 from .categories import Categories
+from .tags import Tags
 
 
 class BlogPost(models.Model):
@@ -30,10 +31,17 @@ class BlogPost(models.Model):
 
     da = models.DateTimeField(_("Date of create"), auto_now_add=True)
     de = models.DateTimeField(_("Date of last edit"), auto_now=True)
-    
+
     category = models.ForeignKey(
         Categories,
         verbose_name=_("category"),
+        null=True,
+        blank=True
+    )
+
+    tags = models.ForeignKey(
+        Tags,
+        verbose_name=_("tags"),
         null=True,
         blank=True
     )
