@@ -30,9 +30,4 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Tags',
             },
         ),
-        migrations.AddField(
-            model_name='blogpost',
-            name='tags',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='django_blogposts.Tags', verbose_name='tags'),
-        ),
     ]

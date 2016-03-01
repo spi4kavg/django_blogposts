@@ -7,6 +7,7 @@ from .models.blogpost import BlogPost
 from .models.categories import Categories
 from .models.tags import Tags
 from django.conf import settings
+from django.db.models import Q
 
 
 class PostsListView(ListView):
@@ -34,13 +35,17 @@ class PostsListView(ListView):
                 )
 
         if getattr(settings, 'BLOGPOSTS_USE_TAGS', True):
-            queryset = queryset.filter(
-                tags__is_moderated=True
-            )
-
             if self.request.GET.get('tag'):
                 queryset = queryset.filter(
+                    tags__is_moderated=True
+                )
+
+                queryset = queryset.filter(
                     tags__slug=self.request.GET.get('tag')
+                )
+            else:
+                queryset = queryset.filter(
+                    Q(tags__is_moderated=True) | Q(tags=None)
                 )
 
         if self.request.GET.get('q'):

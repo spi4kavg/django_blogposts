@@ -47,10 +47,9 @@ class BlogPost(models.Model):
         blank=True
     )
 
-    tags = models.ForeignKey(
+    tags = models.ManyToManyField(
         Tags,
         verbose_name=_("tags"),
-        null=True,
         blank=True
     )
 
@@ -67,3 +66,6 @@ class BlogPost(models.Model):
 
     def get_absolute_url(self):
         return reverse('django-blogposts-detail', args=(self.pk, self.slug,))
+
+    def get_tags(self):
+        return self.tags.filter(is_moderated=True)

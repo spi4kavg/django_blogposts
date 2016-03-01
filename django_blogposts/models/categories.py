@@ -17,9 +17,9 @@ class Categories(models.Model):
     )
 
     content = models.TextField(
-		_("Short description of category (if needed)"),
-		null=True, blank=True
-	)
+        ("Short description of category (if needed)"),
+        null=True, blank=True
+    )
 
     is_moderated = models.BooleanField(_("Is moderated"), default=True)
 
