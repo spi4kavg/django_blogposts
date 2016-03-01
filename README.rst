@@ -45,6 +45,8 @@ BLOGPOSTS_USE_CATEGORIES = False
 
 BLOGPOSTS_USE_TAGS = False
 
+if you want to use ckeditor for editing short_content and content of post, you can install it and add into install apps
+
 
 you can use search if you send request to /?q=example+of+query
 ```
