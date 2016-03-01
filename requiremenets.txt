@@ -3,3 +3,4 @@ pillow
 django-autofixture
 pytils
 django-autoslug==1.9.3
+django-ckeditor

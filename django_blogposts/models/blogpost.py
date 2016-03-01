@@ -7,6 +7,14 @@ from autoslug import AutoSlugField
 from .categories import Categories
 from .tags import Tags
 
+TextField = models.TextField
+
+try:
+    from ckeditor.fields import RichTextField
+    TextField = RichTextField
+except ImportError:
+    pass
+
 
 class BlogPost(models.Model):
 
@@ -22,8 +30,8 @@ class BlogPost(models.Model):
     )
 
     header = models.CharField(_("Header (tag H1)"), max_length=400)
-    short_content = models.TextField(_("Short content for preview"))
-    content = models.TextField(_("Content"))
+    short_content = TextField(_("Short content for preview"))
+    content = TextField(_("Content"))
 
     image = models.ImageField(_("Image"), upload_to="blog/%Y/%m/%d")
 

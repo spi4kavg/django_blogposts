@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'django_blogposts',
     'autofixture',
+    'ckeditor',
 ]
 
 MIDDLEWARE_CLASSES = [
