@@ -53,7 +53,7 @@ class PostsListView(ListView):
                 header__icontains=self.request.GET.get('q'),
             )
 
-        return queryset.only(*self.model_fields)
+        return queryset.distinct().only(*self.model_fields)
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostsListView, self).get_context_data(*args, **kwargs)
