@@ -13,14 +13,11 @@ class BlogPostSitemap(Sitemap):
             items = items.filter(category__is_moderated=True)
 
         if getattr(settings, 'BLOGPOSTS_USE_TAGS', True):
-            if self.request.GET.get('tag'):
-                items = items.filter(tags__is_moderated=True)
-            else:
-                items = items.filter(
-                    Q(tags__is_moderated=True) | Q(tags=None)
-                )
+            items = items.filter(
+                Q(tags__is_moderated=True) | Q(tags=None)
+            )
 
-        return items
+        return items.distinct()
 
     def lastmod(self, obj):
         return obj.de

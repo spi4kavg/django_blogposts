@@ -13,20 +13,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='blogpost',
-            name='content',
-            field=ckeditor.fields.RichTextField(verbose_name='Content'),
-        ),
-        migrations.AlterField(
-            model_name='blogpost',
-            name='short_content',
-            field=ckeditor.fields.RichTextField(verbose_name='Short content for preview'),
-        ),
-        migrations.RemoveField(
-            model_name='blogpost',
-            name='tags',
-        ),
         migrations.AddField(
             model_name='blogpost',
             name='tags',
