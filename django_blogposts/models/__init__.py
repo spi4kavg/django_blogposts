@@ -1,2 +1,2 @@
-from blogpost import *
-from categories import *
+from django_blogposts.models.blogpost import *
+from django_blogposts.models.categories import *
