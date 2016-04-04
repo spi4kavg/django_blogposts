@@ -30,10 +30,10 @@ class BlogPost(models.Model):
     )
 
     header = models.CharField(_("Header (tag H1)"), max_length=400)
-    short_content = TextField(_("Short content for preview"))
+    short_content = TextField(_("Short content for preview"), blank=True, null=True)
     content = TextField(_("Content"))
 
-    image = models.ImageField(_("Image"), upload_to="blog/%Y/%m/%d")
+    image = models.ImageField(_("Image"), upload_to="blog/%Y/%m/%d", null=True, blank=True)
 
     is_moderated = models.BooleanField(_("Is moderated"), default=True)
 
