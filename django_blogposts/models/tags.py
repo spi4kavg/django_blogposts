@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-__author__ = "spi4ka"
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from autoslug import AutoSlugField
+__author__ = "spi4ka"
 
 
 class Tags(models.Model):
 
-    name = models.CharField(_("Name"), max_length=400)
+    name = models.CharField(_("Name"), max_length=20)
     slug = AutoSlugField(
         _("Slug"),
         populate_from='name',
-        max_length=100,
+        max_length=20,
         always_update=True
     )
 

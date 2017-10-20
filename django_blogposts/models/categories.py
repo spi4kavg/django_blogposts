@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-__author__ = "spi4ka"
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from autoslug import AutoSlugField
+__author__ = "spi4ka"
 
 
 class Categories(models.Model):
 
-    name = models.CharField(_("Name"), max_length=400)
+    name = models.CharField(_("Name"), max_length=20)
     slug = AutoSlugField(
         _("Slug"),
         populate_from='name',
-        max_length=100,
+        max_length=40,
         always_update=True
     )
 
     content = models.TextField(
         ("Short description of category (if needed)"),
-        null=True, blank=True
+        null=True, blank=True, max_length=1000
     )
 
     is_moderated = models.BooleanField(_("Is moderated"), default=True)
@@ -38,4 +38,7 @@ class Categories(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('django-category-blogposts-list', args=(self.pk, self.slug,))
+        return reverse(
+            'django-category-blogposts-list',
+            args=(self.pk, self.slug,)
+        )

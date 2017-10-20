@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-__author__ = "spi4ka"
 from django.contrib import admin
 from .models.blogpost import BlogPost
 from .models.categories import Categories
 from .models.tags import Tags
 from django.conf import settings
+__author__ = "spi4ka"
 
 
 post_exclude = []

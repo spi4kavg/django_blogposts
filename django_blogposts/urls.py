@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-__author__ = "spi4ka"
 from django.conf.urls import url
 from .views import PostsListView, PostsDetailView
+__author__ = "spi4ka"
 
 
 urlpatterns = [

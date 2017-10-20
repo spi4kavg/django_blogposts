@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blogpost',
             name='short_content',
-            field=ckeditor.fields.RichTextField(blank=True, null=True, verbose_name='Short content for preview'),
+            field=models.TextField(blank=True, null=True, verbose_name='Short content for preview'),
         ),
     ]
