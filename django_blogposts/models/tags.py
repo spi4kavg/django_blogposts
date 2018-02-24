@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from autoslug import AutoSlugField
 __author__ = "spi4ka"
 
 
 class Tags(models.Model):
 
-    name = models.CharField(_("Name"), max_length=20)
-    slug = AutoSlugField(
+    name = models.CharField(_("Name"), max_length=200)
+    slug = models.SlugField(
         _("Slug"),
-        populate_from='name',
-        max_length=20,
-        always_update=True
+        max_length=200,
+        allow_unicode=True
     )
 
     is_moderated = models.BooleanField(_("Is moderated"), default=True)

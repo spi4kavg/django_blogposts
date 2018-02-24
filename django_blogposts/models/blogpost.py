@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from autoslug import AutoSlugField
 from .categories import Categories
 from .tags import Tags
 __author__ = "spi4ka"
@@ -22,11 +21,10 @@ class BlogPost(models.Model):
     meta_kw = models.CharField(_("Meta-tag keywords"), max_length=300)
     meta_desc = models.TextField(_("Meta-tag Description"))
 
-    slug = AutoSlugField(
+    slug = models.SlugField(
         _("Slug"),
-        populate_from='header',
-        max_length=100,
-        always_update=True
+        max_length=200,
+        allow_unicode=True
     )
 
     header = models.CharField(_("Header (tag H1)"), max_length=200)
@@ -50,13 +48,14 @@ class BlogPost(models.Model):
         Categories,
         verbose_name=_("category"),
         null=True,
-        blank=True
+        blank=True,
+        on_delete=models.CASCADE
     )
 
     tags = models.ManyToManyField(
         Tags,
         verbose_name=_("tags"),
-        blank=True
+        blank=True,
     )
 
     class Meta:

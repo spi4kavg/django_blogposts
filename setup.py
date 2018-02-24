@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name="django_blogposts",
@@ -11,10 +11,14 @@ setup(
         "django_blogposts.migrations",
     ],
     include_package_data=True,
-    package_data={'django_blogposts': ['django_blogposts/templates', 'django_blogposts/locale']},
+    package_data={
+        'django_blogposts': [
+            'django_blogposts/templates',
+            'django_blogposts/locale'
+        ]
+    },
     install_requires=[
         'pillow',
         'pytils',
-        'django-autoslug==1.9.3'
     ]
 )

@@ -15,6 +15,7 @@ else:
     @admin.register(Categories)
     class CategoriesAdmin(admin.ModelAdmin):
         search_fields = ('name', 'slug', 'da', )
+        prepopulated_fields = {'slug': ('name',)}
         list_filter = ['is_moderated']
 
 if not getattr(settings, 'BLOGPOSTS_USE_TAGS', True):
@@ -23,11 +24,13 @@ else:
     @admin.register(Tags)
     class TagsAdmin(admin.ModelAdmin):
         search_fields = ('name', 'slug', 'da', )
+        prepopulated_fields = {'slug': ('name',)}
         list_filter = ['is_moderated']
 
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
     search_fields = ('header', 'meta_title', 'slug', 'da', )
+    prepopulated_fields = {'slug': ('header',)}
     list_filter = ['is_moderated']
     exclude = post_exclude
