@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="django_blogposts",
-    version='0.3.3',
+    version='0.3.4',
     description='Django module for simple blog',
     author='Spi4ka',
     packages=[
