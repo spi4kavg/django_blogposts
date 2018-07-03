@@ -43,7 +43,7 @@ def last_post(exclude=[]):
         if isinstance(exclude, int):
             exclude = [exclude]
 
-    object_list = BlogPost.objects.filter(
+    object_list = BlogPost.active.filter(
         category__is_moderated=True,
         is_moderated=True
     ).prefetch_related('category')

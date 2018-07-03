@@ -2,17 +2,23 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.http import Http404
+from django.conf import settings
+from django.db.models import Q
+from django.views.decorators.cache import cache_page
 from .models.blogpost import BlogPost
 from .models.categories import Categories
 from .models.tags import Tags
-from django.conf import settings
-from django.db.models import Q
 __author__ = "spi4ka"
+
+
+CACHE_TIMEOUT = 0
+if getattr(settings, 'BLOGPOST_CACHE_TIMEOUT', False):
+    CACHE_TIMEOUT = settings.BLOGPOST_CACHE_TIMEOUT
 
 
 class PostsListView(ListView):
 
-    queryset = BlogPost.objects.filter(is_moderated=True)
+    queryset = BlogPost.active.all()
 
     paginate_by = 10
 
@@ -49,16 +55,32 @@ class PostsListView(ListView):
                 )
 
         if self.request.GET.get('q'):
-            queryset = queryset.filter(
-                header__icontains=self.request.GET.get('q'),
-            )
+            if 'django.contrib.postgres' in settings.INSTALLED_APPS:
+                # from django.contrib.postgres.search import (
+                #     SearchQuery, SearchVector, SearchRank
+                # )
+
+                # query = SearchQuery(self.request.GET.get('q'))
+                # vector = SearchVector('header')
+                # queryset = queryset.annotate(
+                #     search=vector
+                # ).filter(search=query).annotate(
+                #     rank=SearchRank(vector, query)
+                # ).order_by('-rank')
+                queryset = queryset.filter(
+                    header__search=self.request.GET.get('q')
+                )
+            else:
+                queryset = queryset.filter(
+                    header__icontains=self.request.GET.get('q'),
+                )
 
         return queryset.distinct().defer(
             'content', 'meta_title', 'meta_kw', 'meta_desc', 'de'
         )
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, *args, **kw):
+        context = super().get_context_data(*args, **kw)
         if self.kwargs.get('pk'):
             if getattr(settings, 'BLOGPOSTS_USE_CATEGORIES', True):
                 try:
@@ -78,14 +100,15 @@ class PostsListView(ListView):
 
 class PostsDetailView(DetailView):
 
-    queryset = BlogPost.objects.filter(
-        is_moderated=True
-    ).select_related('category')
+    queryset = BlogPost.active.all()
 
     template_name = "django_blogposts/detail.html"
 
-    def get_object(self, *args, **kwargs):
-        page = super().get_object(*args, **kwargs)
+    def dispatch(self, *args, **kw):
+        return cache_page(CACHE_TIMEOUT)(super().dispatch)(*args, **kw)
+
+    def get_object(self, *args, **kw):
+        page = super().get_object(*args, **kw)
         try:
             if getattr(settings, 'BLOGPOSTS_USE_CATEGORIES', True):
                 if not page.category.is_moderated:

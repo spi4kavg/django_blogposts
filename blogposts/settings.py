@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-
+    'elasticsearch-dsl',
     'django_blogposts',
     'autofixture',
     'ckeditor',

@@ -2,6 +2,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from .managers import ActiveManager
 from .categories import Categories
 from .tags import Tags
 __author__ = "spi4ka"
@@ -9,8 +10,8 @@ __author__ = "spi4ka"
 TextField = models.TextField
 
 try:
-    from ckeditor.fields import RichTextField
-    TextField = RichTextField
+    from ckeditor_uploader.fields import RichTextUploadingField
+    TextField = RichTextUploadingField
 except ImportError:
     pass
 
@@ -62,6 +63,10 @@ class BlogPost(models.Model):
         verbose_name = "Blog post"
         verbose_name_plural = "Blog posts"
         ordering = ['-da']
+
+    objects = models.Manager()
+
+    active = ActiveManager()
 
     def __unicode__(self):
         return u"{}".format(self.__str__(),)
