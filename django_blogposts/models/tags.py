@@ -7,10 +7,10 @@ __author__ = "spi4ka"
 
 class Tags(models.Model):
 
-    name = models.CharField(_("Name"), max_length=200)
+    name = models.CharField(_("Name"), max_length=100)
     slug = models.SlugField(
         _("Slug"),
-        max_length=200,
+        max_length=100,
         allow_unicode=True
     )
 

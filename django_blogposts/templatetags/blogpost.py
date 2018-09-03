@@ -10,9 +10,10 @@ register = template.Library()
 
 
 @register.inclusion_tag('django_blogposts/list-item.html')
-def blogpost_list_item(page):
+def blogpost_list_item(page, is_odd=False):
     return {
-        'object': page
+        'object': page,
+        'is_odd': is_odd
     }
 
 
@@ -52,3 +53,11 @@ def last_post(exclude=[]):
         object_list = object_list.exclude(pk__in=exclude)
 
     return {'object_list': object_list[0:6]}
+
+
+@register.simple_tag
+def get_last_posts(count=6):
+    return BlogPost.active.filter(
+        category__is_moderated=True,
+        is_moderated=True
+    ).prefetch_related('category')[0:count]

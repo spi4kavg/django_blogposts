@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.conf import settings
 from .views import PostsListView, PostsDetailView
 __author__ = "spi4ka"
 
@@ -23,3 +24,9 @@ urlpatterns = [
         name="django-blogposts-detail",
     )
 ]
+
+if 'rest_framework' in settings.INSTALLED_APPS:
+    urlpatterns += [
+        url(r'^api/', include('django_blogposts.rest.urls')),
+    ]
+
